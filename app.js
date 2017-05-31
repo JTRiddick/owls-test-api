@@ -7,14 +7,23 @@ var path = require("path");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 
+var mongoose = require("mongoose");
+var session = require("express-session");
+var flash = require("connect-flash");
+
 var app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// app.use(function(req,res,next){
-//   console.log("In comes a " + req.method + " to " + req.url);
-//   next();
-// });
+app.use(logger("short"));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.use(function(req,res,next){
+  console.log("In comes a " + req.method + " to " + req.url);
+  next();
+});
 
 // Always return the main index.html, so react-router render the route in the client
 // app.get('*', (req, res) => {
@@ -22,9 +31,11 @@ const PORT = process.env.PORT || 3000;
 //
 // });
 
-app.get("/", function(req, res){
-  // console.log('locals', app.locals);
-  res.sendFile(__dirname,'.','static',"index.html");
+
+
+app.use("/", function(req, res){
+
+  res.status(200).sendFile(path.resolve(__dirname,'static',"index.html"));
 });
 
 app.use(function(req,res){
