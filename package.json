@@ -29,5 +29,8 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0"
   },
-  "homepage": "https://github.com/JTRiddick/owls-test-api#readme"
+  "homepage": "https://github.com/JTRiddick/owls-test-api#readme",
+  "devDependencies": {
+
+  }
 }
