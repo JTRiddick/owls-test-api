@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var bycrypt = require("bcrypt-nodejs");
+var bcrypt = require("bcrypt-nodejs");
 
 const SALT_FACTOR = 10;
 
@@ -12,13 +12,10 @@ var userSchema = mongoose.Schema({
   score: Number
 });
 
-userSchema.methods.name = () => {
-  return this.displayName || this.username;
-}
 
 var noop = () => {};
 
-userSchema.pre("save", (done) => {
+userSchema.pre("save", function(done) {
   var user = this;
   if (!user.isModified("password")) {
     return done();
@@ -38,6 +35,10 @@ userSchema.methods.checkPassword = (guess,done) => {
     done(err, isMatch);
   });
 };
+
+userSchema.methods.name = function(){
+  return this.displayName || this.username;
+}
 
 var User = mongoose.model("User", userSchema);
 module.exports = User;

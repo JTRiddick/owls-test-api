@@ -8,22 +8,26 @@ var logger = require("morgan");
 var bodyParser = require("body-parser");
 
 var mongoose = require("mongoose");
+var passport = require("passport");
 var session = require("express-session");
 var flash = require("connect-flash");
 
+var passportSetup = require("./passportsetup");
 
 var app = express();
 
 var routes = require("./routes");
 
 mongoose.connect("mongodb://localhost:27017/test");
+passportSetup();
 
 const PORT = process.env.PORT || 3000;
 
 app.use(logger("short"));
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }));
+
 app.use(session({
   secret:"Qtypnaspoij40593$%^$asdb111213",
   resave: true,
@@ -31,6 +35,10 @@ app.use(session({
 }));
 
 app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(routes);
 
 app.set("views", path.join(__dirname,"views"));
