@@ -22,6 +22,8 @@ router.get("/", (req,res,next) => {
   });
 });
 
+
+
 router.get("/login",function(req,res){
   res.render("login");
 });
@@ -64,6 +66,32 @@ router.post("/signup",(req,res,next)=>{
   failureRedirect: "/signup",
   failureFlash: true
 }));
+
+function ensureAuthenticated(req,res,next){
+  if (req.isAuthenticated()){
+    next();
+  } else {
+    req.flash("info", "You must be logged in to see this page.");
+    res.redirect("/login");
+  }
+}
+
+router.get("/edit", ensureAuthenticated, function(req,res){
+  res.render("edit");
+});
+
+router.post("/edit", ensureAuthenticated, function(req,res,next){
+  req.user.displayName = req.body.displayname;
+  req.user.bio = req.body.bio;
+  req.user.save(function(err) {
+    if (err) {
+      next(err);
+      return;
+    }
+    req.flash("info", "Profile updated!");
+    res.redirect("/edit");
+  });
+});
 
 
 module.exports = router;
