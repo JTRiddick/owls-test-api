@@ -16,7 +16,13 @@ var passportSetup = require("./passportsetup");
 
 var app = express();
 
+mongoose.Promise = global.Promise;
+
 var routes = require("./routes");
+var apiPostRoutes = require("./api/routes/postRoutes");
+var apiTodoRoutes = require('./api/routes/todoListRoutes');
+
+Task = require('./api/models/todoListModel');
 
 mongoose.connect("mongodb://localhost:27017/test");
 passportSetup();
@@ -27,6 +33,7 @@ app.use(logger("short"));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(bodyParser.json());
 
 app.use(session({
   secret:"Qtypnaspoij40593$%^$asdb111213",
@@ -40,6 +47,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(routes);
+apiPostRoutes(app);
+apiTodoRoutes(app);
 
 app.set("views", path.join(__dirname,"views"));
 app.set("view engine","ejs");
@@ -49,6 +58,9 @@ app.use(function(req,res,next){
   next();
 });
 
+app.use(function(req, res) {
+  res.status(404).send({url: req.originalUrl + ' not found'})
+});
 
 
 // Always return the main index.html, so react-router render the route in the client

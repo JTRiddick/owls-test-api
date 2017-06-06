@@ -1,6 +1,6 @@
 var passport = require("passport");
 
-var User = require("./models/user");
+var User = require("./api/models/user");
 
 var LocalStrategy = require("passport-local").Strategy;
 
