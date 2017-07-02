@@ -1,18 +1,15 @@
 'use strict';
 module.exports = function(app) {
-  var postUser = require('../controllers/postController');
+  var posts = require('../controllers/postController');
 
 
-  // todoList Routes
-  app.route('/api/users')
-    .get(postUser.list_all_users)
-    .post(postUser.create_a_user);
+  // posting Routes
+  app.route('/api/posts')
+    .get(posts.list_all_posts)
+    .post(posts.create_a_post);
 
-
-  app.route('api/users/:userId')
-    .get(postUser.read_a_user);
-
-  app.route('api/users/:userId')
-    .put(postUser.update_a_user)
-    .delete(postUser.delete_a_user);
+  app.route('api/posts/:postId')
+    .get(posts.read_a_post)
+    .put(posts.edit_a_post)
+    .delete(posts.delete_a_post);
 };

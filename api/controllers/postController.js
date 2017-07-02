@@ -2,58 +2,54 @@
 
 
 var mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  Post = mongoose.model('Posts');
 
-exports.list_all_users = function(req, res) {
-  User.find({}, function(err, task) {
+exports.list_all_posts = function(req, res) {
+  Post.find({}, function(err, post) {
     if (err)
       res.send(err);
-    res.json(task);
+    res.json(post);
   });
 };
 
 
 
 
-exports.create_a_user = function(req, res) {
-  var new_user = new User({
-    username: req.body.username,
-    password: req.body.password
-  });
-  new_user.save(function(err, task) {
+exports.create_a_post = function(req, res) {
+  var new_post = new Post(req.body);
+  new_post.save(function(err, post) {
     if (err)
       res.send(err);
-    res.json(task);
+    res.json(post);
   });
 };
 
 
-exports.read_a_user = function(req, res) {
-  User.findById(req.params.userId, function(err, user) {
+exports.read_a_post = function(req, res) {
+  Post.findById(req.params.postId, function(err, post) {
     if (err)
       res.send(err);
-    res.json(user);
+    res.json(post);
   });
 };
 
 
-exports.update_a_user = function(req, res) {
-  User.findOneAndUpdate(req.params.userId, req.body, {new: true}, function(err, user) {
+exports.edit_a_post = function(req, res) {
+  Post.findOneAndUpdate(req.params.postId, req.body, {new: true}, function(err, post) {
     if (err)
       res.send(err);
-    res.json(task);
+    res.json(post);
   });
 };
 
 
-exports.delete_a_user = function(req, res) {
+exports.delete_a_post = function(req, res) {
 
-
-  User.remove({
-    _id: req.params.userId
-  }, function(err, user) {
+  Post.remove({
+    _id: req.params.postId
+  }, function(err, post) {
     if (err)
       res.send(err);
-    res.json({ message: 'User successfully deleted' });
+    res.json({ message: 'Post successfully deleted' });
   });
 };
