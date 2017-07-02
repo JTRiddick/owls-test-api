@@ -2,19 +2,21 @@
 
 <h1>Hello, this is Owls</h1>
 
+<% users.forEach(function(user) { %>
+
   <div class="panel panel-default">
     <div class="panel-heading">
-      This is a Testing API
+      <a href="/users/<%= user.username %>">
+        <%= user.name() %>
+      </a>
     </div>
-
+    <% if (user.bio) { %>
       <div class="panel-body">
-        Nothing here is for you.
-        <p>
-          Don't touch anything
-        </p>
+        <%= user.bio %>
       </div>
-
+    <% } %>
   </div>
 
+<% }) %>
 
 <% include _footer %>

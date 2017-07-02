@@ -12,13 +12,13 @@ router.use( function(req,res,next){
   next();
 });
 
-router.get("/", (req,res,next) => {
+router.get("/users", (req,res,next) => {
 
   User.find()
   .sort({ createdAt: "descending" })
   .exec((err,users)=>{
     if (err) { return next(err); }
-    res.render("index", {users: users});
+    res.render("users", {users: users});
   });
 });
 

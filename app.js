@@ -70,33 +70,23 @@ app.use(function(req,res,next){
   next();
 });
 
+app.get("/", (req,res,next) => {
+  res.render("index");
+});
+
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
 
 
-// Always return the main index.html, so react-router render the route in the client
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
-//
-// });
+app.use(function(err,req,res,next){
+  console.error(err);
+  next(err);
+})
 
-// app.use("/", function(req, res){
-//   res.status(200).sendFile(path.resolve(__dirname,'static',"index.html"));
-// });
-//
-// app.use(function(req,res){
-//   res.status(404).render("404");
-// });
-//
-// app.use(function(err,req,res,next){
-//   console.error(err);
-//   next(err);
-// })
-//
-// app.use(function(err,req,res,next){
-//   res.status(500).send("Internal Server Error\n",err);
-// });
+app.use(function(err,req,res,next){
+  res.status(500).send("Internal Server Error\n",err);
+});
 
 
 app.listen(PORT, () => {
