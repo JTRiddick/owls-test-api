@@ -25,6 +25,7 @@ Post = require('./api/models/postModel');
 var routes = require("./routes");
 var apiPostRoutes = require("./api/routes/postRoutes");
 var apiTodoRoutes = require('./api/routes/todoListRoutes');
+var apiUserRouters = require("./api/routes/userRoutes");
 
 var dbLocation = process.env.MONGODB_URI || 'mongodb://localhost:27017/owls-api';
 
@@ -55,6 +56,7 @@ app.use(passport.session());
 app.use(routes);
 apiPostRoutes(app);
 apiTodoRoutes(app);
+apiUserRouters(app);
 
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -74,15 +76,15 @@ app.get("/", (req,res,next) => {
   res.render("index");
 });
 
-app.use(function(req, res) {
-  res.status(404).send({url: req.originalUrl + ' not found'})
-});
-
-
 app.use(function(err,req,res,next){
   console.error(err);
   next(err);
 })
+
+app.use(function(req, res) {
+  res.status(404).send({url: req.originalUrl + ' not found'})
+});
+
 
 app.use(function(err,req,res,next){
   res.status(500).send("Internal Server Error\n",err);

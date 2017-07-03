@@ -8,7 +8,7 @@ module.exports = function(app) {
     .get(posts.list_all_posts)
     .post(posts.create_a_post);
 
-  app.route('api/posts/:postId')
+  app.route('/api/posts/:postId')
     .get(posts.read_a_post)
     .put(posts.edit_a_post)
     .delete(posts.delete_a_post);
