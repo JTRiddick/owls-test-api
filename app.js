@@ -13,6 +13,8 @@ var session = require("express-session");
 var flash = require("connect-flash");
 
 var passportSetup = require("./passportsetup");
+var authController = require('./api/controllers/auth');
+
 
 var app = express();
 //https://stackoverflow.com/questions/7067966/how-to-allow-cors

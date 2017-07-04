@@ -17,6 +17,8 @@ exports.list_all_posts = function(req, res) {
 
 exports.create_a_post = function(req, res) {
   var new_post = new Post(req.body);
+  console.log('create post req', req);
+  console.log('new post ', new_post);
   new_post.save(function(err, post) {
     if (err)
       res.send(err);
