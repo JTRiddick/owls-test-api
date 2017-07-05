@@ -1,7 +1,9 @@
 'use strict';
 module.exports = function(app) {
+  var passport = require('passport');
   var postUser = require('../controllers/userController');
-  var authController = require('../controllers/auth');
+  var authController = require('../controllers/jwtAuth');
+  require('../../config/passport')(passport);
   var jwt = require('jsonwebtoken');
   var User = require('../models/user');
   var config = require('../../config/database');

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(app) {
   var posts = require('../controllers/postController');
-  var authController = require('../controllers/auth');
+  var authController = require('../controllers/jwtAuth');
 
   // posting Routes
   app.route('/api/posts')

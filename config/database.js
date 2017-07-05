@@ -4,6 +4,6 @@
 var dbLocation = process.env.MONGODB_URI || 'mongodb://localhost:27017/owls-api';
 
 module.exports = {
-  'secret' : 'nodeauthsecret',
+  'secret' : 'hereComeMySpecialPosts',
   'database' : dbLocation
 }

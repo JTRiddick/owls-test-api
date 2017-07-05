@@ -14,7 +14,7 @@ var flash = require("connect-flash");
 
 var config = require('./config/database');
 var passportLocalSetup = require("./config/passport");
-var passportSetup = require("./config/passportjwt");
+// var passportSetup = require("./config/passportjwt");
 var authController = require('./api/controllers/auth');
 
 
@@ -51,6 +51,8 @@ app.use(session({
   resave: true,
   saveUninitialized:true
 }));
+
+// console.log('process.env ', process.env);
 
 app.use(flash());
 
