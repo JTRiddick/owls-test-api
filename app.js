@@ -13,8 +13,7 @@ var session = require("express-session");
 var flash = require("connect-flash");
 
 var config = require('./config/database');
-// var passportSetup = require("./config/passport");
-var passportSetup = require("./config/passportjwt");
+var passportSetup = require("./config/passport");
 var authController = require('./api/controllers/auth');
 
 
@@ -35,7 +34,7 @@ var apiUserRouters = require("./api/routes/userRoutes");
 
 
 mongoose.connect(config.database);
-// passportSetup();
+passportSetup();
 
 const PORT = process.env.PORT || 3000;
 
