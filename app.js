@@ -12,7 +12,9 @@ var passport = require("passport");
 var session = require("express-session");
 var flash = require("connect-flash");
 
-var passportSetup = require("./passportsetup");
+var config = require('./config/database');
+// var passportSetup = require("./config/passport");
+var passportSetup = require("./config/passportjwt");
 var authController = require('./api/controllers/auth');
 
 
@@ -28,12 +30,12 @@ var routes = require("./routes");
 var apiPostRoutes = require("./api/routes/postRoutes");
 var apiTodoRoutes = require('./api/routes/todoListRoutes');
 var apiUserRouters = require("./api/routes/userRoutes");
+//
+// var dbLocation = process.env.MONGODB_URI || 'mongodb://localhost:27017/owls-api';
 
-var dbLocation = process.env.MONGODB_URI || 'mongodb://localhost:27017/owls-api';
 
-
-mongoose.connect(dbLocation);
-passportSetup();
+mongoose.connect(config.database);
+// passportSetup();
 
 const PORT = process.env.PORT || 3000;
 
@@ -62,7 +64,7 @@ apiUserRouters(app);
 
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With", "Content-Type", "Accept");
   next();
 });
 
