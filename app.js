@@ -52,6 +52,11 @@ app.use(session({
   saveUninitialized:true
 }));
 
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With", "Content-Type", "Accept");
+  next();
+});
 // console.log('process.env ', process.env);
 
 app.use(flash());
@@ -63,12 +68,6 @@ app.use(routes);
 apiPostRoutes(app);
 apiTodoRoutes(app);
 apiUserRouters(app);
-
-app.all('/*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With", "Content-Type", "Accept");
-  next();
-});
 
 app.set("views", path.join(__dirname,"views"));
 app.set("view engine","ejs");
