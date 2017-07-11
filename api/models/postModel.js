@@ -25,7 +25,8 @@ var PostSchema = new Schema({
   meta:{
     votes: Number,
     favs: Number
-  }
+  },
+  userId: mongoose.Schema.Types.ObjectId,
 
 });
 
