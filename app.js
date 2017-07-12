@@ -11,6 +11,7 @@ var mongoose = require("mongoose");
 var passport = require("passport");
 var session = require("express-session");
 var flash = require("connect-flash");
+var cors = require("cors");
 
 var config = require('./config/database');
 var passportLocalSetup = require("./config/passport");
@@ -33,11 +34,13 @@ var apiUserRouters = require("./api/routes/userRoutes");
 //
 // var dbLocation = process.env.MONGODB_URI || 'mongodb://localhost:27017/owls-api';
 
+//express plugin/middleware for allowing cors
+app.use(cors())
 
 mongoose.connect(config.database);
 passportLocalSetup();
 //
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8888;
 
 app.use(logger("short"));
 app.use(bodyParser.urlencoded({

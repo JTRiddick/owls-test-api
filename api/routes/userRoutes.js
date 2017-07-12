@@ -7,7 +7,6 @@ module.exports = function(app) {
   var jwt = require('jsonwebtoken');
   var User = require('../models/user');
   var config = require('../../config/database');
-  
   // user Routes
   app.route('/api/users')
     .get(authController.isAuthenticated,postUser.list_all_users)
