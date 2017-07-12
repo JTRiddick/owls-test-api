@@ -7,10 +7,7 @@ module.exports = function(app) {
   var jwt = require('jsonwebtoken');
   var User = require('../models/user');
   var config = require('../../config/database');
-  var cors = require('cors');
   // user Routes
-
-  app.use(cors());
 
   app.route('/api/users')
     .get(authController.isAuthenticated,postUser.list_all_users)
@@ -41,7 +38,7 @@ module.exports = function(app) {
 
   app.post('/api/signin', function(req, res) {
     User.findOne({
-      username: JSON.parse(req.body.username)
+      username: req.body.username
     }, function(err, user) {
       if (err) throw err;
 
@@ -49,7 +46,7 @@ module.exports = function(app) {
         res.send({success: false, msg: 'Authentication failed. User not found.'});
       } else {
         // check if password matches
-        user.checkPassword(JSON.parse(req.body.password), function (err, isMatch) {
+        user.checkPassword(req.body.password), function (err, isMatch) {
           if (isMatch && !err) {
             // if user is found and password is right create a token
             var token = jwt.sign(user, config.secret);
