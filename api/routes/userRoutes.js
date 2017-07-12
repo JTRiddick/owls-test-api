@@ -8,6 +8,9 @@ module.exports = function(app) {
   var User = require('../models/user');
   var config = require('../../config/database');
   // user Routes
+
+  app.use(cors());
+
   app.route('/api/users')
     .get(authController.isAuthenticated,postUser.list_all_users)
     .post(authController.isAuthenticated,postUser.create_a_user);

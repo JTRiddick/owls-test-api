@@ -55,12 +55,7 @@ app.use(session({
   saveUninitialized:true
 }));
 
-app.all('/*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With", "Content-Type", "Accept");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  next();
-});
+
 // console.log('process.env ', process.env);
 
 app.use(flash());

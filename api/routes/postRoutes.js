@@ -3,6 +3,8 @@ module.exports = function(app) {
   var posts = require('../controllers/postController');
   var authController = require('../controllers/jwtAuth');
 
+  app.use(cors())
+
   // posting Routes
   app.route('/api/posts')
     .get(posts.list_all_posts)
