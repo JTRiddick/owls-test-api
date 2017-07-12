@@ -4,9 +4,9 @@ module.exports = function(app) {
   var authController = require('../controllers/jwtAuth');
 
   app.all('/*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With", "Content-Type", "Accept");
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    req.header("Access-Control-Allow-Origin", "*");
+    req.header("Access-Control-Allow-Headers", "X-Requested-With", "Content-Type", "Accept");
+    req.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     next();
   });
 
