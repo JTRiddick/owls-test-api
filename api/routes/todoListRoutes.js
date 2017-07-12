@@ -1,5 +1,6 @@
 'use strict';
 module.exports = function(app) {
+  var cors = require('cors');
   var todoList = require('../controllers/todoListController');
 
   app.use(cors())

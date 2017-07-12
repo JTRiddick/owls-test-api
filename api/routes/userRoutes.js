@@ -7,6 +7,7 @@ module.exports = function(app) {
   var jwt = require('jsonwebtoken');
   var User = require('../models/user');
   var config = require('../../config/database');
+  var cors = require('cors');
   // user Routes
 
   app.use(cors());

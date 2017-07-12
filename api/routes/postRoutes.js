@@ -2,6 +2,7 @@
 module.exports = function(app) {
   var posts = require('../controllers/postController');
   var authController = require('../controllers/jwtAuth');
+  var cors = require('cors');
 
   app.use(cors())
 
