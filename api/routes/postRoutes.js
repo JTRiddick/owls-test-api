@@ -3,13 +3,6 @@ module.exports = function(app) {
   var posts = require('../controllers/postController');
   var authController = require('../controllers/jwtAuth');
 
-  app.all('/*', function(req, res, next) {
-    req.header("Access-Control-Allow-Origin", "*");
-    req.header("Access-Control-Allow-Headers", "X-Requested-With", "Content-Type", "Accept");
-    req.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    next();
-  });
-
   // posting Routes
   app.route('/api/posts')
     .get(posts.list_all_posts)

@@ -7,14 +7,7 @@ module.exports = function(app) {
   var jwt = require('jsonwebtoken');
   var User = require('../models/user');
   var config = require('../../config/database');
-
-  app.all('/*', function(req, res, next) {
-    req.header("Access-Control-Allow-Origin", "*");
-    req.header("Access-Control-Allow-Headers", "X-Requested-With", "Content-Type", "Accept");
-    req.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    next();
-  });
-
+  
   // user Routes
   app.route('/api/users')
     .get(authController.isAuthenticated,postUser.list_all_users)
