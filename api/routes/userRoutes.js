@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(app) {
   var passport = require('passport');
-  var bodyParser = require("body-parser");
+  // var bodyParser = require("body-parser");
   var postUser = require('../controllers/userController');
   var authController = require('../controllers/jwtAuth');
   require('../../config/passport')(passport);
@@ -10,7 +10,7 @@ module.exports = function(app) {
   var config = require('../../config/database');
   // user Routes
 
-  app.use(bodyParser.json());
+  // app.use(bodyParser.json());
 
   app.route('/api/users')
     .get(authController.isAuthenticated,postUser.list_all_users)
