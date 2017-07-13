@@ -46,6 +46,7 @@ app.use(logger("short"));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(bodyParser.json());
 app.use(express.static(path.join('__dirname', 'static')));
 app.use(bodyParser.json());
 app.use(methodOverride());
