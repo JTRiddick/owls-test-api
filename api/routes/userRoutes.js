@@ -23,7 +23,7 @@ module.exports = function(app) {
 
   app.post('/api/signup', function(req, res) {
     if (!req.body.username || !req.body.password) {
-      res.json({success: false, msg: 'Please pass username and password.'});
+      res.status(403).json({success: false, msg: 'Please pass username and password.'});
     } else {
       var newUser = new User({
         username: req.body.username,
@@ -32,7 +32,7 @@ module.exports = function(app) {
       // save the user
       newUser.save(function(err) {
         if (err) {
-          return res.json({success: false, msg: 'Username already exists.'});
+          return res.status(403).json({success: false, msg: 'Username already exists.'});
         }
         res.json({success: true, msg: 'Successful created new user.'});
       });
@@ -47,7 +47,7 @@ module.exports = function(app) {
       if (err) throw err;
 
       if (!user) {
-        res.send({success: false, msg: 'Authentication failed. User not found.'});
+        res.status(403).send({success: false, msg: 'Authentication failed. User not found.'});
       } else {
         // check if password matches
         user.checkPassword(req.body.password, function (err, isMatch) {
@@ -57,7 +57,8 @@ module.exports = function(app) {
             // return the information including token as JSON
             res.json({success: true, token: 'JWT ' + token});
           } else {
-            res.send({success: false, msg: 'Authentication failed. Wrong password.'});
+            res.status(403).send({success: false, msg: 'Authentication failed. Wrong password.'});
+
           }
         });
       }
