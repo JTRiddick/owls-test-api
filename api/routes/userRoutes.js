@@ -46,7 +46,7 @@ module.exports = function(app) {
         res.send({success: false, msg: 'Authentication failed. User not found.'});
       } else {
         // check if password matches
-        user.checkPassword(req.body.password), function (err, isMatch) {
+        user.checkPassword(req.body.password, function (err, isMatch) {
           if (isMatch && !err) {
             // if user is found and password is right create a token
             var token = jwt.sign(user, config.secret);
