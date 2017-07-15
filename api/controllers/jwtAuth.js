@@ -25,6 +25,7 @@ opts.secretOrKey = config.secret;
 // opts.issuer = 'docowls.herokuapp.com';
 
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+  console.log("JWT Route authenticator called, ",opts)
     User.findOne({id: jwt_payload.sub}, function(err, user) {
         if (err) {
             return done(err, false);

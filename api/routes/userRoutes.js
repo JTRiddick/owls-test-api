@@ -23,7 +23,7 @@ module.exports = function(app) {
 
   app.post('/api/signup', function(req, res) {
     if (!req.body.username || !req.body.password) {
-      res.status(403).json({success: false, msg: 'Please pass username and password.'});
+      res.status(403).send({success: false, msg: 'Please pass username and password.'});
     } else {
       var newUser = new User({
         username: req.body.username,
@@ -32,9 +32,9 @@ module.exports = function(app) {
       // save the user
       newUser.save(function(err) {
         if (err) {
-          return res.status(403).json({success: false, msg: 'Username already exists.'});
+          return res.status(403).send({success: false, msg: 'Username already exists.'});
         }
-        res.json({success: true, msg: 'Successful created new user.'});
+        res.status(200).send({success: true, msg: 'Successful created new user.'});
       });
     }
   });
