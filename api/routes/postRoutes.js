@@ -1,8 +1,11 @@
 'use strict';
 module.exports = function(app) {
+  console.log('app is: ',app);
+  var passport = require('passport');
   var posts = require('../controllers/postController');
   var authController = require('../controllers/jwtAuth');
-
+  require('../../config/passport')(passport);
+  var config = require('../../config/database');
 
   // posting Routes
   app.route('/api/posts')

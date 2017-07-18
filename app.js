@@ -30,12 +30,25 @@ Post = require('./api/models/postModel');
 var routes = require("./routes");
 var apiPostRoutes = require("./api/routes/postRoutes");
 var apiTodoRoutes = require('./api/routes/todoListRoutes');
-var apiUserRouters = require("./api/routes/userRoutes");
+var apiUserRoutes = require("./api/routes/userRoutes");
 //
 // var dbLocation = process.env.MONGODB_URI || 'mongodb://localhost:27017/owls-api';
 
 //express plugin/middleware for allowing cors
-app.use(cors())
+const corsOptions = {
+  "origin": "*",
+  allowedHeaders:'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials',
+  allowCredentials:true
+}
+app.use(cors(corsOptions))
+// Enable CORS from client-side
+// app.options('*',(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header('Access-Control-Allow-Methods', "PUT, GET, POST, DELETE, OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   next();
+// }));
 
 mongoose.connect(config.database);
 passportLocalSetup();
@@ -58,6 +71,7 @@ app.use(session({
 
 
 // console.log('process.env ', process.env);
+console.log('db location: ', (process.env.MONGODB_URI || 'mongodb://localhost:27017/owls-api'))
 
 app.use(flash());
 
@@ -67,7 +81,7 @@ app.use(passport.session());
 app.use(routes);
 apiPostRoutes(app);
 apiTodoRoutes(app);
-apiUserRouters(app);
+apiUserRoutes(app);
 
 app.set("views", path.join(__dirname,"views"));
 app.set("view engine","ejs");

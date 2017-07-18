@@ -10,7 +10,7 @@ module.exports = function(app) {
   var config = require('../../config/database');
   // user Routes
 
-  // app.use(bodyParser.json());
+  console.log('app is ,', app);
 
   app.route('/api/users')
     .get(authController.isAuthenticated,postUser.list_all_users)
