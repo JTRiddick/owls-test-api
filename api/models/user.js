@@ -7,6 +7,19 @@ var userSchema = mongoose.Schema({
   username: { type: String, required: true, unique: true},
   password: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
+  permissions: {
+    type: [{
+      type: String,
+      enum: ['user', 'owner', 'admin']
+    }],
+    default: ['user']
+  },
+  posts: [
+     {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: 'PostModel'
+     }
+ ],
   displayName: String,
   bio: String,
   score: Number
