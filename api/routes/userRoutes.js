@@ -33,8 +33,10 @@ module.exports = function(app) {
       newUser.save(function(err) {
         if (err) {
           return res.status(403).send({success: false, msg: 'Username already exists.'});
+        }else{
+          let token = jwt.sign(newUser, config.secret);
+          res.status(200).json({success: true, token: 'JWT ' + token, msg: 'Successful created new user.'});
         }
-        res.status(200).send({success: true, msg: 'Successful created new user.'});
       });
     }
   });
@@ -53,7 +55,7 @@ module.exports = function(app) {
         user.checkPassword(req.body.password, function (err, isMatch) {
           if (isMatch && !err) {
             // if user is found and password is right create a token
-            var token = jwt.sign(user, config.secret);
+            let token = jwt.sign(user, config.secret);
             // return the information including token as JSON
             res.json({success: true, token: 'JWT ' + token});
           } else {
