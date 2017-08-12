@@ -45,6 +45,7 @@ exports.edit_a_post = function(req, res) {
 
 exports.delete_a_post = function(req, res) {
   console.log('delete post in api called with params :',req.params);
+  console.log('deleting post as user..:',req.user)
   Post.remove({
     _id: req.params.postId
   }, function(err, post) {

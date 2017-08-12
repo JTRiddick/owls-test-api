@@ -1,5 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
+require('mongoose-type-url');
 var Schema = mongoose.Schema;
 
 
@@ -18,11 +19,15 @@ var PostSchema = new Schema({
   body: {
     type: String
   },
+  imageLinks:[
+    {type:mongoose.SchemaTypes.Url}
+  ],
   registered: {
     type: Boolean,
     default: false,
   },
   meta:{
+    categories:[{type:String}],
     votes: Number,
     favs: Number
   },

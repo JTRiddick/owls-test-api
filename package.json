@@ -27,6 +27,7 @@
     "jsonwebtoken": "^7.4.1",
     "method-override": "^2.3.9",
     "mongoose": "^4.11.3",
+    "mongoose-type-url": "^1.0.2",
     "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
